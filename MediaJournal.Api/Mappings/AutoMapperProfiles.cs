@@ -9,7 +9,7 @@ public class AutoMapperProfiles : Profile
     public AutoMapperProfiles()
     {
         CreateMap<GameGenre, GameGenreDto>().ReverseMap();
-        CreateMap<GameGenre, AddGameGenreDto>().ReverseMap();
+        CreateMap<GameGenre, CreateGameGenreDto>().ReverseMap();
         CreateMap<GameGenre, UpdateGameGenreDto>().ReverseMap();
     }
 

@@ -15,7 +15,7 @@ namespace MediaJournal.Api.Controllers
         private readonly IMapper mapper = mapper;
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] AddGameGenreDto addGameGenreDto)
+        public async Task<IActionResult> Create([FromBody] CreateGameGenreDto addGameGenreDto)
         {
             GameGenre gameGenreDomain = mapper.Map<GameGenre>(addGameGenreDto);
 
