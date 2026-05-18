@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<MediaDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MediaDbContext"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MediaJournalDb"));
 });
 
 var app = builder.Build();
