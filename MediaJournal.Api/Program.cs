@@ -1,4 +1,5 @@
 using MediaJournal.Api.Data;
+using MediaJournal.Api.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
 
@@ -17,6 +18,9 @@ builder.Services.AddDbContext<MediaDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MediaJournalDb"));
 });
+
+builder.Services.AddScoped<IGameRepository, SQLGameRepository>()
+    .AddScoped<IGameGenreRepository, SQLGameGenreRepository>();
 
 var app = builder.Build();
 
