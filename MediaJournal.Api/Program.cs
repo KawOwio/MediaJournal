@@ -1,4 +1,5 @@
 using MediaJournal.Api.Data;
+using MediaJournal.Api.Mappings;
 using MediaJournal.Api.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi;
@@ -21,6 +22,8 @@ builder.Services.AddDbContext<MediaDbContext>(options =>
 
 builder.Services.AddScoped<IGameRepository, SQLGameRepository>()
     .AddScoped<IGameGenreRepository, SQLGameGenreRepository>();
+
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile<AutoMapperProfiles>());
 
 var app = builder.Build();
 

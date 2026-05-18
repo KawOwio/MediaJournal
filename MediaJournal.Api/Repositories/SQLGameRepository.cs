@@ -4,14 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MediaJournal.Api.Repositories;
 
-public class SQLGameRepository : IGameRepository
+public class SQLGameRepository(MediaDbContext dbContext) : IGameRepository
 {
-    private readonly MediaDbContext dbContext;
-
-    public SQLGameRepository(MediaDbContext dbContext)
-    {
-        this.dbContext = dbContext;
-    }
+    private readonly MediaDbContext dbContext = dbContext;
 
     public async Task<Game> CreateAsync(Game game)
     {
@@ -32,7 +27,7 @@ public class SQLGameRepository : IGameRepository
 
     public async Task<Game?> UpdateAsync(int id, Game game)
     {
-        Game? gameDomain = GetByIdAsync(id).Result;
+        Game? gameDomain = await GetByIdAsync(id);
 
         if (gameDomain == null)
         {
@@ -52,7 +47,7 @@ public class SQLGameRepository : IGameRepository
 
     public async Task<Game?> DeleteAsync(int id)
     {
-        Game? gameDomain = GetByIdAsync(id).Result;
+        Game? gameDomain = await GetByIdAsync(id);
 
         if (gameDomain == null)
         {
