@@ -26,9 +26,12 @@ namespace MediaJournal.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string? filterName = null, [FromQuery] string? filterGenre = null, 
+            [FromQuery] string? filterPlatform = null, [FromQuery] decimal? minScore = null, [FromQuery] string? sortBy = null, 
+            [FromQuery] bool? isAscending = true, [FromQuery] int? pageNumber = 1, [FromQuery] int? pageSize = 5)
         {
-            List<Game> gameDomains = await gameRepository.GetAllAsync();
+            List<Game> gameDomains = await gameRepository.GetAllAsync(filterName, filterGenre, filterPlatform, minScore, sortBy, 
+                isAscending ?? true, pageNumber ?? 1, pageSize ?? 5);
 
             return Ok(mapper.Map<List<GameDto>>(gameDomains));
         }
