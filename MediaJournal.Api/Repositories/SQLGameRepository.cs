@@ -17,17 +17,25 @@ public class SQLGameRepository(MediaDbContext dbContext) : IGameRepository
 
     public async Task<List<Game>> GetAllAsync()
     {
-        return await dbContext.Games.ToListAsync();
+        IQueryable<Game> query = dbContext.Games
+            .Include(g => g.Genre)
+            .AsQueryable();
+
+        return await query.ToListAsync();
     }
 
     public async Task<Game?> GetByIdAsync(int id)
     {
-        return await dbContext.Games.FirstOrDefaultAsync(g => g.Id == id);
+        return await dbContext.Games
+            .Include(g => g.Genre)
+            .FirstOrDefaultAsync(g => g.Id == id);
     }
 
     public async Task<Game?> UpdateAsync(int id, Game game)
     {
-        Game? gameDomain = await GetByIdAsync(id);
+        Game? gameDomain = await dbContext.Games
+            .Include(g => g.Genre)
+            .FirstOrDefaultAsync(g => g.Id == id);
 
         if (gameDomain == null)
         {
@@ -47,7 +55,9 @@ public class SQLGameRepository(MediaDbContext dbContext) : IGameRepository
 
     public async Task<Game?> DeleteAsync(int id)
     {
-        Game? gameDomain = await GetByIdAsync(id);
+        Game? gameDomain = await dbContext.Games
+            .Include(g => g.Genre)
+            .FirstOrDefaultAsync(g => g.Id == id);
 
         if (gameDomain == null)
         {

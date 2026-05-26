@@ -34,7 +34,7 @@ namespace MediaJournal.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById([FromRoute] int id)
         {
             Game? gameDomain = await gameRepository.GetByIdAsync(id);
 
@@ -47,7 +47,7 @@ namespace MediaJournal.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateGameDto updateGameDto)
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateGameDto updateGameDto)
         {
             Game? gameDomain = await gameRepository.UpdateAsync(id, mapper.Map<Game>(updateGameDto));
 
@@ -60,7 +60,7 @@ namespace MediaJournal.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
             Game? gameDomain = await gameRepository.DeleteAsync(id);
 

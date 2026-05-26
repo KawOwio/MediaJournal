@@ -1,11 +1,11 @@
-using System.ComponentModel.DataAnnotations;
+using MediaJournal.Api.Dtos.GameGenres;
 
 namespace MediaJournal.Api.Dtos.Games;
 
 public record GameDto(
     int Id,
     string Name,
-    int GenreId,
+    GameGenreDto Genre,
     string Platform,
     decimal Score,
     DateOnly CompletionDate
