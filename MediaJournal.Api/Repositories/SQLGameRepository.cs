@@ -42,7 +42,7 @@ public class SQLGameRepository(MediaDbContext dbContext) : IGameRepository
 
         await dbContext.SaveChangesAsync();
 
-        return game;
+        return gameDomain;
     }
 
     public async Task<Game?> DeleteAsync(int id)
